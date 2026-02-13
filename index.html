@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>13th</title>
+
+	<link rel="icon"
+		href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💜</text></svg>">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap"
+		rel="stylesheet">
+
+	<style>
+		:root {
+			--bg-color: #f2efe9;
+			--paper-color: #ffffff;
+			--text-ink: #2a2420;
+			--accent: #7a5f53;
+			--link-color: #4f3b34;
+			--shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+			--radius: 12px;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			background-color: var(--bg-color);
+			color: var(--text-ink);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+			min-height: 100dvh;
+			margin: 0;
+			background-image: radial-gradient(rgba(42, 36, 32, 0.08) 1px, transparent 1px);
+			background-size: 22px 22px;
+			overflow: hidden;
+			font-family: 'Inter', sans-serif;
+		}
+
+		.container {
+			position: relative;
+			width: 92%;
+			max-width: 680px;
+			height: 85vh;
+			max-height: 600px;
+		}
+
+		/* Estilos comunes para todas las "fases" */
+		.stage {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(20px);
+			transition: all 0.8s ease;
+		}
+
+		.stage.active {
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(0);
+		}
+
+		/* ----- EL SOBRE (Fase 0) ----- */
+		#cover {
+			align-items: center;
+			text-align: center;
+			padding: 20px;
+		}
+
+		#cover h1 {
+			font-family: 'Playfair Display', serif;
+			font-size: clamp(1.4rem, 5vw, 2.2rem);
+			letter-spacing: 1.5px;
+			color: var(--accent);
+			margin-bottom: 28px;
+			line-height: 1.3;
+		}
+
+		/* ----- LAS HOJAS (Fase 1 y 2) ----- */
+		.letter-content {
+			background-color: var(--paper-color);
+			padding: clamp(25px, 6vw, 46px) clamp(20px, 6vw, 54px);
+			box-shadow: var(--shadow);
+			border-radius: var(--radius);
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			position: relative;
+			border: 1px solid rgba(122, 95, 83, 0.12);
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
+
+		.letter-content::-webkit-scrollbar {
+			width: 6px;
+		}
+
+		.letter-content::-webkit-scrollbar-track {
+			background: transparent;
+		}
+
+		.letter-content::-webkit-scrollbar-thumb {
+			background-color: rgba(122, 95, 83, 0.3);
+			border-radius: 10px;
+		}
+
+		.content-text {
+			font-family: 'Playfair Display', serif;
+			font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+			line-height: 1.6;
+			flex-grow: 1;
+			margin: 0 0 15px 0;
+		}
+
+		.signature {
+			font-family: 'Playfair Display', serif;
+			font-size: clamp(1.2rem, 5vw, 1.6rem);
+			text-align: right;
+			margin-top: auto;
+			padding-top: 15px;
+		}
+
+		/* Botones, Enlaces y Grupos de Botones */
+		.button-group {
+			display: flex;
+			gap: 15px;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 20px;
+			margin-bottom: 10px;
+			width: 100%;
+		}
+
+		.action-btn {
+			background-color: transparent;
+			border: 1px solid var(--accent);
+			color: var(--accent);
+			font-family: 'Inter', sans-serif;
+			font-weight: 600;
+			padding: 14px 28px;
+			font-size: clamp(0.85rem, 3vw, 0.95rem);
+			letter-spacing: 0.5px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			border-radius: 999px;
+			flex-shrink: 0;
+			text-align: center;
+		}
+
+		.action-btn.secondary {
+			border: 1px dashed rgba(122, 95, 83, 0.5);
+			color: rgba(122, 95, 83, 0.8);
+		}
+
+		.action-btn:hover,
+		.action-btn:active {
+			background-color: var(--accent);
+			color: var(--paper-color);
+			border: 1px solid var(--accent);
+		}
+
+		.song-link {
+			display: inline-block;
+			font-family: 'Inter', sans-serif;
+			font-size: clamp(0.8rem, 3.5vw, 0.9rem);
+			color: var(--link-color);
+			text-decoration: none;
+			border-bottom: 1px dashed var(--link-color);
+			padding: 8px 0;
+			margin-top: 10px;
+			transition: color 0.3s, border-bottom-color 0.3s;
+			align-self: flex-start;
+		}
+
+		.song-link:hover,
+		.song-link:active {
+			color: #000;
+			border-bottom-style: solid;
+		}
+
+		.page-number {
+			font-family: 'Inter', sans-serif;
+			font-size: 0.75rem;
+			color: #a39a94;
+			text-align: center;
+			margin-top: 15px;
+			width: 100%;
+		}
+
+		/* Ajustes específicos para pantallas de celular */
+		@media (max-width: 480px) {
+			.container {
+				width: 95%;
+				height: 90vh;
+			}
+
+			.button-group {
+				flex-direction: column-reverse;
+				gap: 10px;
+			}
+
+			.action-btn {
+				width: 100%;
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+
+		<div class="stage active" id="cover">
+			<h1>Aquí hay algo especial para ti</h1>
+			<button class="action-btn" onclick="changeStage('cover', 'page1')">Abrir Carta</button>
+		</div>
+
+		<div class="stage" id="page1">
+			<div class="letter-content">
+				<p class="content-text">Estamos en la época posiblemente con la mayor comunicación del mundo. Pero aún
+					así es normal que a veces nos sintamos lejos.<br><br>Desde que estás en mi vida es un
+					enorme placer y honor tenerte en ella. Es una belleza despertar y que en la primera hora ilumines
+					mis ideas. Es hermoso pensar en ti, y sonreír sin razón, solo porque tu pensamiento alegra mi
+					existencia.<br><br>Tú Tienes Ese Algo Que Yo Estaba Buscando...</p>
+
+				<a href="https://open.spotify.com/intl-es/track/1omuLiHsrZNngTOHr2FF9U?si=7396754bd91a4be5"
+					target="_blank" class="song-link">🎵 Escuchar: Conmigo Siempre</a>
+
+				<div class="button-group">
+					<button class="action-btn secondary" onclick="changeStage('page1', 'cover')">⬅ Cerrar carta</button>
+					<button class="action-btn" onclick="changeStage('page1', 'page2')">Siguiente hoja ➔</button>
+				</div>
+
+				<div class="page-number">1 / 2</div>
+			</div>
+		</div>
+
+		<div class="stage" id="page2">
+			<div class="letter-content">
+				<p class="content-text">A veces me pongo a pensar en lo que llevamos, las páginas de lo que hasta ahora
+					sería nuestra historia, y desde hace mucho tiempo realmente quería decirte: Tú Pones Buena Suerte en
+					Mi Viernes 13 July 💜</p>
+
+				<a href="https://open.spotify.com/intl-es/track/36ZEFaqp4vVd8VYhvvO4oK?si=15011b99bc5349fe"
+					target="_blank" class="song-link">🎵 Escuchar: Viernes 13</a>
+
+				<p class="signature">Gracias por ser esa suerte.<br>— Para ti mi amada Julissa</p>
+
+				<div class="button-group">
+					<button class="action-btn secondary" onclick="changeStage('page2', 'page1')">⬅ Volver a la hoja
+						anterior</button>
+				</div>
+
+				<div class="page-number">2 / 2</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script>
+		function changeStage(currentId, targetId) {
+			const currentStage = document.getElementById(currentId);
+			const targetStage = document.getElementById(targetId);
+
+			currentStage.classList.remove('active');
+
+			setTimeout(() => {
+				targetStage.classList.add('active');
+			}, 600);
+		}
+	</script>
+
+</body>
+
+</html>
